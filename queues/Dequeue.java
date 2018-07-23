@@ -1,6 +1,7 @@
+import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-public class Dequeue<Item> {
+public class Dequeue<Item> implements Iterable<Item> {
 
     private Node first;
     private Node last;
@@ -140,9 +141,32 @@ public class Dequeue<Item> {
         return item;
     }
 
-//    // return an iterator over items in order from front to end
-//    public Iterator<Item> iterator() {
-//    }
+    // return an iterator over items in order from front to end
+    public Iterator<Item> iterator() {
+        return new ListIterator();
+    }
+
+    public class ListIterator implements Iterator<Item> {
+
+        Node current = first;
+
+        @Override
+        public boolean hasNext() {
+            return current != null;
+        }
+
+        @Override
+        public Item next() {
+            Item toReturn = current.item;
+            current = current.right;
+            return toReturn;
+        }
+
+        @Override
+        public void remove() {
+            throw new UnsupportedOperationException();
+        }
+    }
 
     // unit testing (optional)
     public static void main(String[] args) {
@@ -152,18 +176,35 @@ public class Dequeue<Item> {
         testDequeue.addFirst("two");
         testDequeue.addLast("three");
         testDequeue.addLast("four");
-        System.out.println(testDequeue.removeFirst());
-        System.out.println(testDequeue.removeFirst());
-        System.out.println(testDequeue.removeLast());
-        System.out.println(testDequeue.removeLast());
+
+        for (String item : testDequeue) {
+            System.out.print("Entry - ");
+            System.out.println(item);
+        }
+        System.out.println();
+
+        testDequeue.removeFirst();
+        testDequeue.removeLast();
+
         testDequeue.addLast("three");
         testDequeue.addLast("four");
         testDequeue.addFirst("one");
         testDequeue.addFirst("two");
-        System.out.println(testDequeue.removeFirst());
-        System.out.println(testDequeue.removeFirst());
-        System.out.println(testDequeue.removeLast());
-        System.out.println(testDequeue.removeLast());
+
+        for (String item : testDequeue) {
+            System.out.print("Entry - ");
+            System.out.println(item);
+        }
+        System.out.println();
+
+        testDequeue.removeFirst();
+        testDequeue.removeLast();
+        testDequeue.removeLast();
+
+        for (String item : testDequeue) {
+            System.out.print("Entry - ");
+            System.out.println(item);
+        }
     }
 
 }
