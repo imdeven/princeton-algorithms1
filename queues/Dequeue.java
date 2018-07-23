@@ -1,3 +1,5 @@
+import java.util.NoSuchElementException;
+
 public class Dequeue<Item> {
 
     private Node first;
@@ -80,6 +82,7 @@ public class Dequeue<Item> {
             first = newNode;
             first.right = oldFirst;
         }
+        size++;
         assert (check());
     }
 
@@ -87,9 +90,26 @@ public class Dequeue<Item> {
     public void addLast(Item item) {
     }
 
-//    // remove and return the item from the front
-//    public Item removeFirst() {
-//    }
+    // remove and return the item from the front
+    public Item removeFirst() {
+        Item item;
+        if (isEmpty()) throw new NoSuchElementException();
+        else {
+            item = first.item;
+            if (size() == 1) {
+                first = null;
+                last = null;
+            } else {
+                Node second = first.right;
+                first.right.left = null;
+                first.right = null;
+                first = second;
+            }
+        }
+        size--;
+        check();
+        return item;
+    }
 //
 //    // remove and return the item from the end
 //    public Item removeLast() {
@@ -105,6 +125,8 @@ public class Dequeue<Item> {
         Dequeue<String> testDequeue = new Dequeue<>();
         testDequeue.addFirst("one");
         testDequeue.addFirst("two");
+        System.out.println(testDequeue.removeFirst());
+        System.out.println(testDequeue.removeFirst());
 
     }
 
