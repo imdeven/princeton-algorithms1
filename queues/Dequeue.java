@@ -70,6 +70,7 @@ public class Dequeue<Item> {
 
     // add the item to the front
     public void addFirst(Item item) {
+        if(item == null) throw new IllegalArgumentException();
         Node newNode = new Node();
         newNode.item = item;
         if (isEmpty()) {
@@ -88,6 +89,7 @@ public class Dequeue<Item> {
 
     // add the item to the end
     public void addLast(Item item) {
+        if(item == null) throw new IllegalArgumentException();
         Node newNode = new Node();
         newNode.item = item;
         if(isEmpty()){
@@ -122,11 +124,11 @@ public class Dequeue<Item> {
         check();
         return item;
     }
-//
-//    // remove and return the item from the end
-//    public Item removeLast() {
-//    }
-//
+
+    // remove and return the item from the end
+    public Item removeLast() {
+    }
+
 //    // return an iterator over items in order from front to end
 //    public Iterator<Item> iterator() {
 //    }
