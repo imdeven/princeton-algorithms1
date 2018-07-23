@@ -1,13 +1,34 @@
+import edu.princeton.cs.algs4.StdIn;
+
 public class Dequeue<Item> {
 
     private Node first;
     private Node last;
     private int size;
 
-    private Node{
+    private class Node {
         private Item item;
         private Node left;
         private Node right;
+    }
+
+    //check internal invariants
+    private boolean check() {
+
+        if (size < 0) return false;
+
+        else if (first == null && second != null) return false;
+
+        else if (first != null && second == null) return false;
+
+        else if (first == null && size != 0) return false;
+
+        else if (size == 1) {
+            if (first == null) return false;
+            if(first!==last)
+        }
+
+
     }
 
     // construct an empty deque
@@ -19,6 +40,7 @@ public class Dequeue<Item> {
 
     // is the deque empty?
     public boolean isEmpty() {
+
     }
 
     // return the number of items on the deque
