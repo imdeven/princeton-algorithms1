@@ -70,7 +70,7 @@ public class Dequeue<Item> {
 
     // add the item to the front
     public void addFirst(Item item) {
-        if(item == null) throw new IllegalArgumentException();
+        if (item == null) throw new IllegalArgumentException();
         Node newNode = new Node();
         newNode.item = item;
         if (isEmpty()) {
@@ -89,13 +89,13 @@ public class Dequeue<Item> {
 
     // add the item to the end
     public void addLast(Item item) {
-        if(item == null) throw new IllegalArgumentException();
+        if (item == null) throw new IllegalArgumentException();
         Node newNode = new Node();
         newNode.item = item;
-        if(isEmpty()){
+        if (isEmpty()) {
             first = newNode;
             last = newNode;
-        }else{
+        } else {
             last.right = newNode;
             newNode.left = last;
             last = newNode;
@@ -108,17 +108,15 @@ public class Dequeue<Item> {
     public Item removeFirst() {
         Item item;
         if (isEmpty()) throw new NoSuchElementException();
-        else {
-            item = first.item;
-            if (size() == 1) {
-                first = null;
-                last = null;
-            } else {
-                Node second = first.right;
-                first.right.left = null;
-                first.right = null;
-                first = second;
-            }
+        item = first.item;
+        if (size() == 1) {
+            first = null;
+            last = null;
+        } else {
+            Node second = first.right;
+            first.right.left = null;
+            first.right = null;
+            first = second;
         }
         size--;
         check();
@@ -127,6 +125,19 @@ public class Dequeue<Item> {
 
     // remove and return the item from the end
     public Item removeLast() {
+        if (isEmpty()) throw new NoSuchElementException();
+
+        Item item = last.item;
+        if (size() == 1) {
+            first = null;
+            last = null;
+        } else {
+            last = last.left;
+            last.right = null;
+        }
+        size--;
+        assert (check());
+        return item;
     }
 
 //    // return an iterator over items in order from front to end
@@ -143,8 +154,16 @@ public class Dequeue<Item> {
         testDequeue.addLast("four");
         System.out.println(testDequeue.removeFirst());
         System.out.println(testDequeue.removeFirst());
+        System.out.println(testDequeue.removeLast());
+        System.out.println(testDequeue.removeLast());
+        testDequeue.addLast("three");
+        testDequeue.addLast("four");
+        testDequeue.addFirst("one");
+        testDequeue.addFirst("two");
         System.out.println(testDequeue.removeFirst());
-
+        System.out.println(testDequeue.removeFirst());
+        System.out.println(testDequeue.removeLast());
+        System.out.println(testDequeue.removeLast());
     }
 
 }
