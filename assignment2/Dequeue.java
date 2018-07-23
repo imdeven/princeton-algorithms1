@@ -1,5 +1,11 @@
 public class Dequeue<Item> {
 
+    private Node{
+        private Item item;
+        private Node left;
+        private Node right;
+    }
+
     // construct an empty deque
     public Deque() {
     }
