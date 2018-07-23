@@ -88,6 +88,18 @@ public class Dequeue<Item> {
 
     // add the item to the end
     public void addLast(Item item) {
+        Node newNode = new Node();
+        newNode.item = item;
+        if(isEmpty()){
+            first = newNode;
+            last = newNode;
+        }else{
+            last.right = newNode;
+            newNode.left = last;
+            last = newNode;
+        }
+        size++;
+        assert (check());
     }
 
     // remove and return the item from the front
@@ -125,6 +137,9 @@ public class Dequeue<Item> {
         Dequeue<String> testDequeue = new Dequeue<>();
         testDequeue.addFirst("one");
         testDequeue.addFirst("two");
+        testDequeue.addLast("three");
+        testDequeue.addLast("four");
+        System.out.println(testDequeue.removeFirst());
         System.out.println(testDequeue.removeFirst());
         System.out.println(testDequeue.removeFirst());
 
