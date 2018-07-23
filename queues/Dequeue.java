@@ -56,17 +56,31 @@ public class Dequeue<Item> {
         assert (check());
     }
 
-//    // is the deque empty?
-//    public boolean isEmpty() {
-//
-//    }
+    // is the deque empty?
+    public boolean isEmpty() {
+        return size == 0;
+    }
 
-//    // return the number of items on the deque
-//    public int size() {
-//    }
+    // return the number of items on the deque
+    public int size() {
+        return size;
+    }
 
     // add the item to the front
     public void addFirst(Item item) {
+        Node newNode = new Node();
+        newNode.item = item;
+        if (isEmpty()) {
+            first = newNode;
+            last = first;
+
+        } else {
+            first.left = newNode;
+            Node oldFirst = first;
+            first = newNode;
+            first.right = oldFirst;
+        }
+        assert (check());
     }
 
     // add the item to the end
@@ -89,6 +103,8 @@ public class Dequeue<Item> {
     public static void main(String[] args) {
 
         Dequeue<String> testDequeue = new Dequeue<>();
+        testDequeue.addFirst("one");
+        testDequeue.addFirst("two");
 
     }
 
