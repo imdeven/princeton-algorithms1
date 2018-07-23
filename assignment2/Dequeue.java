@@ -1,5 +1,9 @@
 public class Dequeue<Item> {
 
+    private Node first;
+    private Node last;
+    private int size;
+
     private Node{
         private Item item;
         private Node left;
@@ -8,6 +12,9 @@ public class Dequeue<Item> {
 
     // construct an empty deque
     public Deque() {
+        first = null;
+        last = null;
+        size = 0;
     }
 
     // is the deque empty?
