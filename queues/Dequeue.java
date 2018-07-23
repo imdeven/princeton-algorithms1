@@ -17,6 +17,7 @@ public class Dequeue<Item> {
 
         else if (first == null && last != null) return false;
 
+        //after this statement both first and last would be null together
         else if (first != null && last == null) return false;
 
         else if (first == null && size != 0) return false;
