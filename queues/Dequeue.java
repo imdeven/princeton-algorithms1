@@ -17,15 +17,34 @@ public class Dequeue<Item> {
 
         else if (first == null && last != null) return false;
 
-        //after this statement both first and last would be null together
+            //after this statement both first and last would be null together
         else if (first != null && last == null) return false;
 
         else if (first == null && size != 0) return false;
 
         else if (size == 1) {
             if (first == null) return false;
+            if (first != last) return false;
+            if (first.right != null) return false;
+            if (last.left != null) return false;
+        } else {
+            if (first == null) return false;
+            if (last == null) return false;
+            if (first.right != null) return false;
+            if (last.left == null) return false;
         }
 
+        int numberOfNodes = 0;
+        for (Node i = first; i != null; i = i.right) {
+            numberOfNodes++;
+        }
+        if (numberOfNodes != size) return false;
+
+        numberOfNodes = 0;
+        for (Node i = last; i != null; i = i.left) {
+            numberOfNodes++;
+        }
+        if (numberOfNodes != size) return false;
         return true;
     }
 
@@ -34,6 +53,7 @@ public class Dequeue<Item> {
         first = null;
         last = null;
         size = 0;
+        assert (check());
     }
 
 //    // is the deque empty?
@@ -67,6 +87,9 @@ public class Dequeue<Item> {
 
     // unit testing (optional)
     public static void main(String[] args) {
+
+        Dequeue<String> testDequeue = new Dequeue<>();
+
     }
 
 }
