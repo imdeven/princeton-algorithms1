@@ -157,6 +157,7 @@ public class Dequeue<Item> implements Iterable<Item> {
 
         @Override
         public Item next() {
+            if (!hasNext()) throw new NoSuchElementException();
             Item toReturn = current.item;
             current = current.right;
             return toReturn;
