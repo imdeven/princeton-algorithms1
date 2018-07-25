@@ -1,7 +1,7 @@
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-public class Dequeue<Item> implements Iterable<Item> {
+public class Deque<Item> implements Iterable<Item> {
 
     private Node first;
     private Node last;
@@ -52,7 +52,7 @@ public class Dequeue<Item> implements Iterable<Item> {
     }
 
     // construct an empty deque
-    public Dequeue() {
+    public Deque() {
         first = null;
         last = null;
         size = 0;
@@ -172,37 +172,37 @@ public class Dequeue<Item> implements Iterable<Item> {
     // unit testing (optional)
     public static void main(String[] args) {
 
-        Dequeue<String> testDequeue = new Dequeue<>();
-        testDequeue.addFirst("one");
-        testDequeue.addFirst("two");
-        testDequeue.addLast("three");
-        testDequeue.addLast("four");
+        Deque<String> testDeque = new Deque<>();
+        testDeque.addFirst("one");
+        testDeque.addFirst("two");
+        testDeque.addLast("three");
+        testDeque.addLast("four");
 
-        for (String item : testDequeue) {
+        for (String item : testDeque) {
             System.out.print("Entry - ");
             System.out.println(item);
         }
         System.out.println();
 
-        testDequeue.removeFirst();
-        testDequeue.removeLast();
+        testDeque.removeFirst();
+        testDeque.removeLast();
 
-        testDequeue.addLast("three");
-        testDequeue.addLast("four");
-        testDequeue.addFirst("one");
-        testDequeue.addFirst("two");
+        testDeque.addLast("three");
+        testDeque.addLast("four");
+        testDeque.addFirst("one");
+        testDeque.addFirst("two");
 
-        for (String item : testDequeue) {
+        for (String item : testDeque) {
             System.out.print("Entry - ");
             System.out.println(item);
         }
         System.out.println();
 
-        testDequeue.removeFirst();
-        testDequeue.removeLast();
-        testDequeue.removeLast();
+        testDeque.removeFirst();
+        testDeque.removeLast();
+        testDeque.removeLast();
 
-        for (String item : testDequeue) {
+        for (String item : testDeque) {
             System.out.print("Entry - ");
             System.out.println(item);
         }
