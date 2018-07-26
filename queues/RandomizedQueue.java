@@ -90,6 +90,7 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
                     i++;
                 }
             }
+            StdRandom.shuffle(nonNullItems);
         }
 
         @Override
@@ -121,9 +122,12 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
         randomizedQueue.enqueue("third");
         randomizedQueue.enqueue("four");
         randomizedQueue.enqueue("five");
-        System.out.println(randomizedQueue.sample());
+        //System.out.println(randomizedQueue.sample());
         randomizedQueue.dequeue();
         randomizedQueue.dequeue();
+        for (String item : randomizedQueue) {
+            System.out.println(item);
+        }
         for (String item : randomizedQueue) {
             System.out.println(item);
         }
