@@ -13,14 +13,22 @@ public class Deque<Item> implements Iterable<Item> {
         private Node right;
     }
 
-    //check internal invariants
+    // construct an empty deque
+    public Deque() {
+        first = null;
+        last = null;
+        size = 0;
+        assert (check());
+    }
+
+    // check internal invariants
     private boolean check() {
 
         if (size < 0) return false;
 
         else if (first == null && last != null) return false;
 
-            //after this statement both first and last would be null together
+            // after this statement both first and last would be null together
         else if (first != null && last == null) return false;
 
         else if (first == null && size != 0) return false;
@@ -49,14 +57,6 @@ public class Deque<Item> implements Iterable<Item> {
         }
         if (numberOfNodes != size) return false;
         return true;
-    }
-
-    // construct an empty deque
-    public Deque() {
-        first = null;
-        last = null;
-        size = 0;
-        assert (check());
     }
 
     // is the deque empty?
@@ -120,7 +120,7 @@ public class Deque<Item> implements Iterable<Item> {
             first = second;
         }
         size--;
-        check();
+        assert (check());
         return item;
     }
 

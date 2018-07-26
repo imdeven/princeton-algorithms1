@@ -9,14 +9,14 @@ import java.util.NoSuchElementException;
 public class RandomizedQueue<Item> implements Iterable<Item> {
 
     private int numberOfItems;
-    private int N;
+    private int n;
     private Item[] items;
 
     public RandomizedQueue()                 // construct an empty randomized queue
     {
         items = (Item[]) new Object[2];
         numberOfItems = 0;
-        N = 0;
+        n = 0;
     }
 
     public boolean isEmpty()                 // is the randomized queue empty?
@@ -33,9 +33,9 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
     {
         if (item == null) throw new IllegalArgumentException();
 
-        if (N == items.length) resize(2 * N);
-        items[N] = item;
-        N++;
+        if (n == items.length) resize(2 * n);
+        items[n] = item;
+        n++;
         numberOfItems++;
     }
 
@@ -65,9 +65,9 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
     }
 
     private int nonNullRandomIndex() {
-        int indexToEmpty = StdRandom.uniform(N);
+        int indexToEmpty = StdRandom.uniform(n);
         while (items[indexToEmpty] == null) {
-            indexToEmpty = StdRandom.uniform(N);
+            indexToEmpty = StdRandom.uniform(n);
         }
         return indexToEmpty;
     }
@@ -79,12 +79,12 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
 
     private class ArrayIterator implements Iterator<Item> {
 
-        private int[] nonNullItems = new int[numberOfItems];
+        private final int[] nonNullItems = new int[numberOfItems];
         private int current = 0;
 
         public ArrayIterator() {
             int i = 0;
-            for (int j = 0; j < N; j++) {
+            for (int j = 0; j < n; j++) {
                 if (items[j] != null) {
                     nonNullItems[i] = j;
                     i++;
@@ -99,6 +99,7 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
 
         @Override
         public Item next() {
+            if (!hasNext()) throw new NoSuchElementException();
             Item toReturn = items[nonNullItems[current]];
             current++;
             return toReturn;
