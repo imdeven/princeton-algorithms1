@@ -54,7 +54,11 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
         Item toReturn = items[indexToEmpty];
         items[indexToEmpty] = null;
         numberOfItems--;
+        if ((numberOfItems > 0) && (numberOfItems == items.length / 4)) {
+            resize(items.length / 2);
+        }
         return toReturn;
+
     }
 
     public Item sample()                     // return a random item (but do not remove it)
