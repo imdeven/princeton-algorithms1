@@ -122,7 +122,7 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
         randomizedQueue.enqueue("third");
         randomizedQueue.enqueue("four");
         randomizedQueue.enqueue("five");
-        //System.out.println(randomizedQueue.sample());
+        // System.out.println(randomizedQueue.sample());
         randomizedQueue.dequeue();
         randomizedQueue.dequeue();
         for (String item : randomizedQueue) {
