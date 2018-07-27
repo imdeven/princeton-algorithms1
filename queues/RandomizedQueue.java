@@ -33,18 +33,32 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
     {
         if (item == null) throw new IllegalArgumentException();
 
-        if (n == items.length) resize(2 * n);
+        if (n == items.length) {
+            resize(2 * numberOfItems);
+            n = numberOfItems;
+        }
         items[n] = item;
         n++;
         numberOfItems++;
     }
 
-    private void resize(final int newSize) {
+    private void resize(int newSize) {
+        assert (newSize >= numberOfItems);
+        // see test case test1
+        if (newSize == 0) {
+            newSize = 2;
+        }
         Item[] temp = (Item[]) new Object[newSize];
-        for (int i = 0; i < items.length; i++) {
-            temp[i] = items[i];
+        int i = 0;
+        for (int j = 0; j < items.length; j++) {
+            if (items[j] != null) {
+                temp[i] = items[j];
+                i++;
+            }
         }
         items = temp;
+        // Note to self: assertions won't run by default
+        assert (i == (numberOfItems - 1) || i == 0);
     }
 
     public Item dequeue()                    // remove and return a random item
@@ -56,6 +70,7 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
         numberOfItems--;
         if ((numberOfItems > 0) && (numberOfItems == items.length / 4)) {
             resize(items.length / 2);
+            n = numberOfItems;
         }
         return toReturn;
 
@@ -119,19 +134,12 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
     public static void main(String[] args)   // unit testing (optional)
     {
         RandomizedQueue<String> randomizedQueue = new RandomizedQueue<>();
-        assert (randomizedQueue.isEmpty());
-        assert (randomizedQueue.size() == 0);
         randomizedQueue.enqueue("first");
         randomizedQueue.enqueue("second");
-        randomizedQueue.enqueue("third");
-        randomizedQueue.enqueue("four");
-        randomizedQueue.enqueue("five");
-        // System.out.println(randomizedQueue.sample());
         randomizedQueue.dequeue();
         randomizedQueue.dequeue();
-        for (String item : randomizedQueue) {
-            System.out.println(item);
-        }
+        //here numberOfItems = 0, but n = 2
+        randomizedQueue.enqueue("three");
         for (String item : randomizedQueue) {
             System.out.println(item);
         }
